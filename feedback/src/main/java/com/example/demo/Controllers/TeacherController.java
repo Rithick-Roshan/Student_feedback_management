@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.Model.Cources;
 import com.example.demo.Model.TeacherEntity;
 import com.example.demo.Repository.TeacherRepository;
 
@@ -28,23 +29,43 @@ public class TeacherController {
 	}
 	
 	@PostMapping("/create")
-	public ResponseEntity<String> createUser(@RequestBody TeacherEntity teacher){
+	public ResponseEntity<String> createTeacher(@RequestBody TeacherEntity teacher){
 		teacherrepo.save(teacher);
 		return ResponseEntity.ok("Your information was sucessfully registered");
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<String> updateUser(@PathVariable int id,TeacherEntity teacher){
+	public ResponseEntity<String> updateTeacher(@PathVariable int id,@RequestBody TeacherEntity teacher){
 		teacherrepo.update(id, teacher);
-		return ResponseEntity.ok("User detail was updated");
+		return ResponseEntity.ok("Teacher detail was updated");
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteUser(@PathVariable int id){
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> deleteTeacher(@PathVariable int id){
 		teacherrepo.delete(id);
-		return ResponseEntity.ok("User detail was deleted");
+		return ResponseEntity.ok("Teacher detail was deleted");
 	}
-
+    @PostMapping("/addCource/{id}")
+    public ResponseEntity<String> addTeacherCources(@PathVariable int id, @RequestBody List<Cources> cource ){
+    	String str=teacherrepo.addCourcesForTeacher(id, cource);
+    	return ResponseEntity.ok(str);
+    }
 	
-
+    @GetMapping("/getCource/{id}")
+    public List<String> getCourcesOfTeacher(@PathVariable("id") int teacherId){
+    	System.out.println(teacherId);
+    	return teacherrepo.getAllCoucesById(teacherId);
+    }
+    
+    @GetMapping("/getAllCource")
+    public List<String> getAllCource(){
+    	return teacherrepo.getAllCouces();
+    }
+    
+    @DeleteMapping("/deleteCource/{id}")
+     public ResponseEntity<String> deleteCourceById(@PathVariable("id") int teacher_id,@RequestBody List<Cources> c){
+    	
+    	teacherrepo.deleteCource(teacher_id, c);
+    	return ResponseEntity.ok("Course was deleted");
+    }
 }

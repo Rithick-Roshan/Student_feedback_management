@@ -4,7 +4,7 @@ public class TeacherEntity {
      private int teacher_id ;
      private String name;
      private String email;
-     private String passwoprd;
+     private String password;
      private String dep;
 
 	 public String getName() {
@@ -19,12 +19,6 @@ public class TeacherEntity {
 	 public void setEmail(String email) {
 		 this.email = email;
 	 }
-	 public String getPasswoprd() {
-		 return passwoprd;
-	 }
-	 public void setPasswoprd(String passwoprd) {
-		 this.passwoprd = passwoprd;
-	 }
 	 public String getDep() {
 		 return dep;
 	 }
@@ -36,5 +30,11 @@ public class TeacherEntity {
 	 }
 	 public void setTeacher_id(int teacher_id) {
 		this.teacher_id = teacher_id;
+	 }
+	 public String getPassword() {
+		return password;
+	 }
+	 public void setPassword(String password) {
+		this.password = password;
 	 }
 }
